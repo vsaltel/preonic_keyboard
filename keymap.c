@@ -269,6 +269,10 @@ void matrix_scan_user(void) {
 		{
 			SEND_STRING("#include ");
 		}
+		SEQ_ONE_KEY(KC_P)
+		{
+			SEND_STRING("ft_printf("%s\n",); ");
+		}
 	}
 #endif
 }
