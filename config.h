@@ -46,5 +46,7 @@
 
 #define LEADER_TIMEOUT 500
 
+#define AUTO_SHIFT_TIMEOUT 150
+
 //CTRL + SHIFT Modifier key
 #define CS(x) LCTL(LSFT(x))
