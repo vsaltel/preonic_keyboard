@@ -45,3 +45,6 @@
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 40
 
 #define LEADER_TIMEOUT 500
+
+//CTRL + SHIFT Modifier key
+#define CS(x) LCTL(LSFT(x))
