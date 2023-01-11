@@ -15,7 +15,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "muse.h"
 
 enum preonic_layers {
   _QWERTY,
@@ -100,9 +99,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | F12  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Sleep | Wake |Reset |      |      |      |      |      |      |PrintS|  Del |
+ * |      |Sleep | Wake |      |Reset |      |      |      |      |      |PrintS|  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |Powoff|Debug |Aud on|AudOff|AGnorm|AGswap|Qwerty|      |KeyLok|      | AS + |
+ * |      |Powoff|      |Aud on|AudOff|AGnorm|AGswap|Qwerty|      |KeyLok|      | AS + |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Lock |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|      |      |      |      | AS - |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -111,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_preonic_grid( \
   KC_F12,  KC_F1,   KC_F2,   KC_F3,  KC_F4,   KC_F5,   KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  \
-  _______, KC_SLEP, KC_WAKE, RESET,  _______, _______, TERM_ON,  TERM_OFF,_______, _______, KC_PSCR, KC_DEL,  \
-  _______, KC_PWR,  DEBUG,   AU_ON,  AU_OFF,  AG_NORM, AG_SWAP,  QWERTY,  _______, QK_LOCK, _______, AS_UP,   \
-  KC_CAPS, MUV_DE,  MUV_IN,  MU_ON,  MU_OFF,  MI_ON,   MI_OFF,   _______, _______, _______, _______, AS_DOWN, \
+  _______, KC_SLEP, KC_WAKE, _______, RESET,   _______, _______, _______, _______, _______, KC_PSCR, KC_DEL,  \
+  _______, KC_PWR,  _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______, QK_LOCK, _______, AS_UP,   \
+  KC_CAPS, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, AS_DOWN, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, AS_RPT   \
 )
 
@@ -168,56 +167,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     return true;
 };
-
-bool muse_mode = false;
-uint8_t last_muse_note = 0;
-uint16_t muse_counter = 0;
-uint8_t muse_offset = 70;
-uint16_t muse_tempo = 50;
-
-void encoder_update_user(uint8_t index, bool clockwise) {
-  if (muse_mode) {
-    if (IS_LAYER_ON(_RAISE)) {
-      if (clockwise) {
-        muse_offset++;
-      } else {
-        muse_offset--;
-      }
-    } else {
-      if (clockwise) {
-        muse_tempo+=1;
-      } else {
-        muse_tempo-=1;
-      }
-    }
-  } else {
-    if (clockwise) {
-      register_code(KC_PGDN);
-      unregister_code(KC_PGDN);
-    } else {
-      register_code(KC_PGUP);
-      unregister_code(KC_PGUP);
-    }
-  }
-}
-
-void dip_switch_update_user(uint8_t index, bool active) {
-    switch (index) {
-        case 0:
-            if (active) {
-                layer_on(_ADJUST);
-            } else {
-                layer_off(_ADJUST);
-            }
-            break;
-        case 1:
-            if (active) {
-                muse_mode = true;
-            } else {
-                muse_mode = false;
-            }
-    }
-}
 
 LEADER_EXTERNS();
 
