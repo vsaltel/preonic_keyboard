@@ -25,7 +25,7 @@ command_exists() {
 ## VARS         ##
 DIRPATH=$(dirname ${0})
 LOGFILE="${DIRPATH}/logs.txt"
-PACKAGES="build-essential curl python3 python3-pip git gcc-arm-none-eabi"
+PACKAGES="build-essential curl python3 python3-pip gcc-arm-none-eabi"
 
 ## START        ##
 # Check sudo
@@ -35,18 +35,6 @@ if [ "${EUID}" -ne 0 ] ; then
 fi
 
 if [ ! -e "qmk_firmware" ] ; then
-    # Check apt
-    if [ ! -e "/etc/apt/sources.list" ] ; then
-        echo -e "${BOLD}${RED}NO APT SOURCES LIST${NC}" | tee -a ${LOGFILE}
-        exit
-    fi
-    
-    # Add qmk apt source
-    grep 'linux.qmk.fm' /etc/apt/sources.list &>> /dev/null
-    if [ ${?} -ne 0 ] ; then
-        echo "deb https://linux.qmk.fm/ buster main" >> /etc/apt/sources.list
-    fi
-    
     # Update
     echo -e "${BOLD}${YELLOW}APT UPDATE${NC}" | tee -a ${LOGFILE}
     apt-get -y update >> ${LOGFILE}
