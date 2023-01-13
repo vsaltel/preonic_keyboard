@@ -27,7 +27,6 @@ enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
-  BACKLIT
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -80,150 +79,105 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | RAlt |  Mb1 | Mup  | Mb2  | Mwup |      |      |      |Insert| Copy |Paste |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Lead |Mleft |Mdown |Mright| Mwdo |      | Lum+ | Vol+ |      | Home | End  |AS ON |
+ * | Lead |Mleft |Mdown |Mright| Mwdo | Lum+ | Vol+ | Next | Home | End  |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |CapsWo|RShift|      |      | Prev | Next | Lum- | Vol- |      |PageDo|PageUp|AS OFF|
+ * |CapsWo|RShift|      |      |      | Lum- | Vol- | Prev |PageDo|PageUp|      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |Rctrl | RAlt | RGUI |  x   |     Play    |    Mute     |  x   |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_preonic_grid( \
-  KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  \
-  KC_RALT, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______, _______, _______, KC_INS,  KC_COPY, KC_PSTE, _______, \
-  KC_LEAD, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, _______, KC_BRIU, KC_VOLU, _______, KC_HOME, KC_END,  AS_ON,   \
-  CW_TOGG, KC_RSFT, _______, _______, KC_MPRV, KC_MNXT, KC_BRID, KC_VOLD, _______, KC_PGDN, KC_PGUP, AS_OFF,  \
-  KC_RCTL, KC_RALT, KC_RGUI, _______, KC_MPLY, KC_MPLY, KC_MUTE, KC_MUTE, _______, _______, _______, _______  \
+  KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   \
+  KC_RALT, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______, _______, _______, KC_INS,  KC_COPY, KC_PSTE, _______,  \
+  KC_LEAD, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_BRIU, KC_VOLU, KC_MNXT, KC_HOME, KC_END,  _______, _______,  \
+  CW_TOGG, KC_RSFT, _______, _______, _______, KC_BRID, KC_VOLD, KC_MPRV, KC_PGDN, KC_PGUP, _______, _______,  \
+  KC_RCTL, KC_RALT, KC_RGUI, _______, KC_MPLY, KC_MPLY, KC_MUTE, KC_MUTE, _______, _______, _______, _______   \
 ),
 
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
  * | F12  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Sleep | Wake |      |Reset |      |      |      |      |      |PrintS|  Del |
+ * |      |Sleep | Wake |      |Reset |      |      |      |      |      |PrintS|      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |Powoff|      |Aud on|AudOff|AGnorm|AGswap|Qwerty|      |KeyLok|      | AS + |
+ * |      |Powoff|      |      |      |      |      |Qwerty|      |KeyLok|      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Lock |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|      |      |      |      | AS - |
+ * | Lock |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |             |             |      |      |      |AS RPT|
+ * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_preonic_grid( \
   KC_F12,  KC_F1,   KC_F2,   KC_F3,  KC_F4,   KC_F5,   KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  \
-  _______, KC_SLEP, KC_WAKE, _______, QK_BOOT, _______, _______, _______, _______, _______, KC_PSCR, KC_DEL,  \
-  _______, KC_PWR,  _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______, QK_LOCK, _______, AS_UP,   \
-  KC_CAPS, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, AS_DOWN, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, AS_RPT   \
+  _______, KC_SLEP, KC_WAKE, _______, QK_BOOT, _______, _______, _______, _______, _______, KC_PSCR, _______, \
+  _______, KC_PWR,  _______, _______, _______, _______, _______, QWERTY,  _______, QK_LOCK, _______, _______, \
+  KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 )
 
 
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
+    switch (keycode) {
         case QWERTY:
-          if (record->event.pressed) {
-            set_single_persistent_default_layer(_QWERTY);
-          }
-          return false;
-          break;
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_QWERTY);
+            }
+            return false;
+            break;
         case LOWER:
-          if (record->event.pressed) {
-            layer_on(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
+            if (record->event.pressed) {
+                layer_on(_LOWER);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            } else {
+                layer_off(_LOWER);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            }
+            return false;
+            break;
         case RAISE:
-          if (record->event.pressed) {
-            layer_on(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
-        case BACKLIT:
-          if (record->event.pressed) {
-            register_code(KC_RSFT);
-            #ifdef BACKLIGHT_ENABLE
-              backlight_step();
-            #endif
-            #ifdef __AVR__
-            PORTE &= ~(1<<6);
-            #endif
-          } else {
-            unregister_code(KC_RSFT);
-            #ifdef __AVR__
-            PORTE |= (1<<6);
-            #endif
-          }
-          return false;
-          break;
-      }
+            if (record->event.pressed) {
+                layer_on(_RAISE);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            } else {
+                layer_off(_RAISE);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            }
+            return false;
+            break;
+    }
     return true;
 };
 
 LEADER_EXTERNS();
 
 void matrix_scan_user(void) {
-#ifdef AUDIO_ENABLE
-    if (muse_mode) {
-        if (muse_counter == 0) {
-            uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
-            if (muse_note != last_muse_note) {
-                stop_note(compute_freq_for_midi_note(last_muse_note));
-                play_note(compute_freq_for_midi_note(muse_note), 0xF);
-                last_muse_note = muse_note;
-            }
+#ifdef LEADER_ENABLE
+    LEADER_DICTIONARY()
+    {
+        leading = false;
+        leader_end();
+        SEQ_ONE_KEY(KC_I)
+        {
+            SEND_STRING("#include \"\"" SS_TAP(X_LEFT));
         }
-        muse_counter = (muse_counter + 1) % muse_tempo;
-    } else {
-        if (muse_counter) {
-            stop_all_notes();
-            muse_counter = 0;
+        SEQ_ONE_KEY(KC_M)
+        {
+            SEND_STRING("int main(int argc, char **argv)\n{\n\n}" SS_TAB(X_UP));
+        }
+        SEQ_ONE_KEY(KC_G)
+        {
+            SEND_STRING("https://github.com/vsaltel/");
+        }
+        SEQ_ONE_KEY(KC_P)
+        {
+            SEND_STRING("printf(\"%s\\n\",);" SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+        }
+        SEQ_ONE_KEY(KC_R)
+        {
+            SEND_STRING("return (0);");
         }
     }
 #endif
-#ifdef LEADER_ENABLE
-	LEADER_DICTIONARY()
-	{
-		leading = false;
-		leader_end();
-		SEQ_ONE_KEY(KC_I)
-		{
-			SEND_STRING("#include \"\"" SS_TAP(X_LEFT));
-		}
-		SEQ_ONE_KEY(KC_M)
-		{
-			SEND_STRING("int main(int argc, char **argv)\n{\n\n}" SS_TAB(X_UP));
-		}
-		SEQ_ONE_KEY(KC_G)
-		{
-			SEND_STRING("https://github.com/vsaltel/");
-		}
-		SEQ_ONE_KEY(KC_P)
-		{
-			SEND_STRING("printf(\"%s\\n\",);" SS_TAP(X_LEFT) SS_TAP(X_LEFT));
-		}
-		SEQ_ONE_KEY(KC_R)
-		{
-			SEND_STRING("return (0);");
-		}
-	}
-#endif
-}
-
-bool music_mask_user(uint16_t keycode) {
-  switch (keycode) {
-    case RAISE:
-    case LOWER:
-      return false;
-    default:
-      return true;
-  }
 }
