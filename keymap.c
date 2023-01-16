@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Lead |Mleft |Mdown |Mright| Mwdo | Lum+ | Vol+ | Next | Home | End  |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |CapsWo|RShift|      |      |      | Lum- | Vol- | Prev |PageDo|PageUp|      |      |
+ * |RShift|CapsWo|      |      |      | Lum- | Vol- | Prev |PageDo|PageUp|      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |Rctrl | RAlt | RGUI |  x   |     Play    |    Mute     |  x   |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   \
   KC_RALT, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______, _______, _______, KC_INS,  KC_COPY, KC_PSTE, _______,  \
   KC_LEAD, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_BRIU, KC_VOLU, KC_MNXT, KC_HOME, KC_END,  _______, _______,  \
-  CW_TOGG, KC_RSFT, _______, _______, _______, KC_BRID, KC_VOLD, KC_MPRV, KC_PGDN, KC_PGUP, _______, _______,  \
+  KC_RSFT, CW_TOGG, _______, _______, _______, KC_BRID, KC_VOLD, KC_MPRV, KC_PGDN, KC_PGUP, _______, _______,  \
   KC_RCTL, KC_RALT, KC_RGUI, _______, KC_MPLY, KC_MPLY, KC_MUTE, KC_MUTE, _______, _______, _______, _______   \
 ),
 
@@ -164,7 +164,7 @@ void matrix_scan_user(void) {
         }
         SEQ_ONE_KEY(KC_M)
         {
-            SEND_STRING("int main(int argc, char **argv)\n{\n\n}" SS_TAB(X_UP));
+            SEND_STRING("int main(int argc, char **argv)\n{\n\n}" SS_TAP(X_UP));
         }
         SEQ_ONE_KEY(KC_G)
         {
@@ -172,11 +172,15 @@ void matrix_scan_user(void) {
         }
         SEQ_ONE_KEY(KC_P)
         {
-            SEND_STRING("printf(\"%s\\n\",);" SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+            SEND_STRING("printf(\"%s\\n\", );" SS_TAP(X_LEFT) SS_TAP(X_LEFT));
         }
         SEQ_ONE_KEY(KC_R)
         {
             SEND_STRING("return (0);");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_C)
+        {
+            SEND_STRING("git@github.com:vsaltel/.git" SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT));
         }
     }
 #endif
